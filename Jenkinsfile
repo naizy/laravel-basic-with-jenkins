@@ -7,14 +7,14 @@ node {
         checkout scm
     }
 
-    stage('Install Composer') {
+    stage('Install Composer Packages') {
         sh '''
             alias composer="php /usr/local/bin/composer.phar"
             composer install
         '''
     }
     
-    stage ('Create env file'){
+    stage ('Create env'){
         sh '''
             cp .env.example .env
             php artisan key:generate
