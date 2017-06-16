@@ -3,7 +3,11 @@ node {
     agent any
     
     environment { 
-        PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
+        composer="php /usr/local/bin/composer.phar"
+    }
+    
+    stage('Configure system') {
+        env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
     }
     
     stage('Checkout from github') {
@@ -12,10 +16,7 @@ node {
     }
 
     stage('Install composer packages') {
-        sh '''
-            alias composer="php /usr/local/bin/composer.phar"
-            composer install
-        '''
+        sh 'composer install'
     }
     
     stage ('Create laravel env'){
