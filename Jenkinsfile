@@ -1,8 +1,6 @@
 node {
     stage('Configure') {
-        echo env.PATH
-        env.PATH = "/usr/local/bin/:${env.PATH}"
-        echo env.PATH
+        env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
     }
 
     stage('Checkout') {
