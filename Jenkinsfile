@@ -5,7 +5,6 @@ pipeline {
     stages {
         stage('Checkout from github') {
             steps {
-                env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
                 checkout scm
             }
         }
