@@ -9,18 +9,24 @@ pipeline {
     
     stages {
         stage('Checkout from github') {
-            echo env.PATH
-            checkout scm
+            steps {
+                echo env.PATH
+                checkout scm
+            }
         }
         stage('Install composer packages') {
-            sh 'composer install'
+            steps {
+                sh 'composer install'
+            }
         }
         stage ('Create laravel env'){
-            sh '''
-                cp .env.example .env
-                php artisan key:generate
-                chmod -R 777 storage/ || true
-            '''
+            steps {
+                sh '''
+                    cp .env.example .env
+                    php artisan key:generate
+                    chmod -R 777 storage/ || true
+                '''
+            }
         }
     }    
 }
