@@ -8,4 +8,8 @@ node {
     stage('Checkout') {
         checkout scm
     }
+
+    stage('Install Composer') {
+        sh 'composer install'
+    }
 }
