@@ -13,4 +13,11 @@ node {
             composer install
         '''
     }
+    
+    stage ('Create env file'){
+        sh '''
+            cp .env.example .env
+            php artisan key:generate
+        '''
+    }
 }
