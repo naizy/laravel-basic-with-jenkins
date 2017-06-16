@@ -5,6 +5,7 @@ pipeline {
     environment { 
         composer="php /usr/local/bin/composer.phar"
         PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
+        php = "/usr/local/php5/bin"
     }
     
     stages {
@@ -23,7 +24,7 @@ pipeline {
             steps {
                 sh '''
                     cp .env.example .env
-                    php artisan key:generate
+                    env.php artisan key:generate
                     chmod -R 777 storage/ || true
                 '''
             }
