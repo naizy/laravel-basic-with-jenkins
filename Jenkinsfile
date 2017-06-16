@@ -11,7 +11,7 @@ node {
 
     stage('Install Composer') {
         sh '''
-            alias composer="php /usr/local/bin/composer.phar"'
+            alias composer="php /usr/local/bin/composer.phar"
             composer install
         '''
     }
