@@ -9,7 +9,13 @@ pipeline {
             }
         }
         stage('Install composer packages') {
+            environment {
+                env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
+                PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
+            }
             steps {
+                echo "${PATH}"
+                echo "${env.PATH}"
                 alias composer="php /usr/local/bin/composer.phar"
                 sh "composer install"
             }
