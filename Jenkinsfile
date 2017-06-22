@@ -4,6 +4,7 @@ pipeline {
         stage('Checkout from github') {
             steps {
                 checkout scm
+                composer install
             }
         }
     }
