@@ -6,8 +6,9 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Install composer packages') {
+        stage('Install required packages') {
              steps {
+                 sh 'sudo apt-get -y install php-xml php-mbstring'
                  sh 'composer install'
              }
          }
