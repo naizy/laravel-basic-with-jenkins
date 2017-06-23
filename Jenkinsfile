@@ -21,4 +21,10 @@ node {
             chmod -R 777 storage/ || true
         '''
     }
+    
+    stage ('Move to production'){
+        sh '''
+            cp -R ./ /Users/Naizy/Documents/links/
+        '''
+    }
 }
