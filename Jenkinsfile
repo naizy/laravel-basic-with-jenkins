@@ -8,10 +8,7 @@ pipeline {
         }
         stage('Install composer packages') {
              steps {
-                 sh '''
-                    alias composer="php /usr/local/bin/composer.phar"
-                    composer install
-                '''
+                 sh 'composer install'
              }
          }
         
