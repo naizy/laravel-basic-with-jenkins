@@ -9,5 +9,10 @@ pipeline {
                 sh 'ls'
             }
         }
+        stage('Deploy') {
+             steps {
+                 sh '/usr/bin/docker run -p 8000:80 hitalos/laravel'
+             }
+         }
     }
 }            
