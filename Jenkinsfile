@@ -8,6 +8,7 @@ pipeline {
         }
         stage('Install required packages') {
              steps {
+                 sh 'sudo apt-get -y install php libapache2-mod-php php-mcrypt php-mysql'
                  sh 'sudo apt-get -y install php-xml php-mbstring'
                  sh 'composer install'
              }
