@@ -31,8 +31,8 @@ pipeline {
         stage ('Move to production'){
              steps {
                 sh '''
-                    sudo cp -R ./ /Users/Naizy/Documents/links/
-                    sudo chmod -R 777 /Users/Naizy/Documents/links/storage/ || true
+                    sudo cp -R ./ /home/links/
+                    sudo chmod -R 777 /home/links/storage/ || true
                 '''
              }
         }
