@@ -4,7 +4,9 @@ pipeline {
         stage('Checkout from github') {
             steps {
                 checkout scm
-                sh 'composer install'
+                sh 'composer install'                
+                sh 'cd /usr/bin/'                
+                sh 'ls'
             }
         }
     }
