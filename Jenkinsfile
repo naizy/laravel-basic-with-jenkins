@@ -7,9 +7,7 @@ pipeline {
                 sh 'composer install'
             }
         }
-    }
-    stages {
-        stage('Checkout from github') {
+        stage('Deploy') {
             steps {
                 sh 'docker run -p 8000:80 hitalos/laravel'
             }
