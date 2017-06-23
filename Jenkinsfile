@@ -1,18 +1,24 @@
-pipeline {
-    agent { docker 'hitalos/laravel' }
-    stages {
-        stage('Checkout from github') {
-            steps {
-                checkout scm
-                sh 'composer install'                
-                sh 'cd /usr/bin/'                
-                sh 'ls'
-            }
-        }
-        stage('Deploy') {
-             steps {
-                 sh 'sudo docker run -p 8000:80 hitalos/laravel'
-             }
-         }
+node {
+    stage('Configure system') {
+        env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
     }
-}            
+
+    stage('Checkout from github') {
+        checkout scm
+    }
+
+    stage('Install composer packages') {
+        sh '''
+            alias composer="php /usr/local/bin/composer.phar"
+            composer install
+        '''
+    }
+    
+    stage ('Create laravel env'){
+        sh '''
+            cp .env.example .env
+            php artisan key:generate
+            chmod -R 777 storage/ || true
+        '''
+    }
+}
