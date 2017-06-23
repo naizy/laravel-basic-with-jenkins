@@ -1,31 +1,48 @@
-node {
+pipeline {
+    agent any
+    stages {
+        stage('Checkout from github') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('Install composer packages') {
+             steps {
+                 sh '''
+                    alias composer="php /usr/local/bin/composer.phar"
+                    composer install
+                '''
+             }
+         }
+        
+        stage ('Create laravel env'){
+             steps {
+                sh '''
+                    cp .env.example .env
+                    php artisan key:generate
+                    chmod -R 777 storage/ || true
+                '''
+             }
+        }
+        
+        stage ('Run Tests'){
+             steps {
+                echo 'Add tests here. if all good, continue to production, else exit and send error.'
+             }
+        }
 
-    stage('Configure system') {
-        env.PATH = "/usr/local/bin/:/usr/local/php5/bin:${env.PATH}"
+        stage ('Move to production'){
+             steps {
+                sh '''
+                    sudo cp -R ./ /Users/Naizy/Documents/links/
+                    sudo chmod -R 777 /Users/Naizy/Documents/links/storage/ || true
+                '''
+             }
+        }
     }
-    stage('Checkout from github') {
-        checkout scm
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
     }
-
-    stage('Install composer packages') {
-        sh '''
-            alias composer="php /usr/local/bin/composer.phar"
-            composer install
-        '''
-    }
-    
-    stage ('Create laravel env'){
-        sh '''
-            cp .env.example .env
-            php artisan key:generate
-            chmod -R 777 storage/ || true
-        '''
-    }
-    
-    stage ('Move to production'){
-        sh '''
-            sudo cp -R ./ /Users/Naizy/Documents/links/
-            sudo chmod -R 777 /Users/Naizy/Documents/links/storage/ || true
-        '''
-    }
-}
+}  
