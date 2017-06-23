@@ -8,4 +8,11 @@ pipeline {
             }
         }
     }
-}
+    stages {
+        stage('Checkout from github') {
+            steps {
+                sh 'docker run -p 8000:80 hitalos/laravel'
+            }
+        }
+    }
+}            
