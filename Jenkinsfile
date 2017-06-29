@@ -27,6 +27,7 @@ pipeline {
         stage ('Run Tests'){
              steps {
                 echo 'Add tests here. if all good, continue to production, else exit and send error.'
+                sh 'exit 0'
              }
         }
 
